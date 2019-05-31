@@ -1,4 +1,13 @@
+const mymap = L.map('mapid');
+let marker = {};
+
 window.addEventListener('DOMContentLoaded', () => {
+  const attribution =
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  const tiles = L.tileLayer(tileUrl, { attribution });
+  tiles.addTo(mymap);
+
   fetch('https://api.wheretheiss.at/v1/satellites/25544?units=miles')
     .then(resp => {
       return resp.json();
@@ -32,4 +41,18 @@ function updateSite(internationalSpaceStation) {
   altitudeTag.innerText = `Altitude in Miles: ${
     internationalSpaceStation.altitude
   }`;
+
+  mymap.setView(
+    [internationalSpaceStation.latitude, internationalSpaceStation.longitude],
+    2
+  );
+
+  if (marker != undefined) {
+    mymap.removeLayer(marker);
+  }
+
+  marker = L.marker([
+    internationalSpaceStation.latitude,
+    internationalSpaceStation.longitude
+  ]).addTo(mymap);
 }

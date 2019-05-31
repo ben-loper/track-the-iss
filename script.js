@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-  fetch('https://api.wheretheiss.at/v1/satellites/25544')
+  fetch('https://api.wheretheiss.at/v1/satellites/25544?units=miles')
     .then(resp => {
       return resp.json();
     })
@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 setInterval(() => {
-  fetch('https://api.wheretheiss.at/v1/satellites/25544')
+  fetch('https://api.wheretheiss.at/v1/satellites/25544?units=miles')
     .then(resp => {
       return resp.json();
     })

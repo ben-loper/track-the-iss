@@ -3,8 +3,8 @@ window.addEventListener('DOMContentLoaded', () => {
     .then(resp => {
       return resp.json();
     })
-    .then(location => {
-      updateSite(location);
+    .then(internationalSpaceStation => {
+      updateSite(internationalSpaceStation);
     });
 });
 
@@ -13,15 +13,23 @@ setInterval(() => {
     .then(resp => {
       return resp.json();
     })
-    .then(location => {
-      updateSite(location);
+    .then(internationalSpaceStation => {
+      updateSite(internationalSpaceStation);
     });
 }, 3000);
 
-function updateSite(location) {
+function updateSite(internationalSpaceStation) {
   const latTag = document.getElementById('latCord');
   const longTag = document.getElementById('longCord');
+  const velocityTag = document.getElementById('velocity');
+  const altitudeTag = document.getElementById('altitude');
 
-  latTag.innerText = `Latitude: ${location.latitude}`;
-  longTag.innerText = `Longitude: ${location.longitude}`;
+  latTag.innerText = `Latitude: ${internationalSpaceStation.latitude}`;
+  longTag.innerText = `Longitude: ${internationalSpaceStation.longitude}`;
+  velocityTag.innerText = `Velocity in MPH: ${
+    internationalSpaceStation.velocity
+  }`;
+  altitudeTag.innerText = `Altitude in Miles: ${
+    internationalSpaceStation.altitude
+  }`;
 }
